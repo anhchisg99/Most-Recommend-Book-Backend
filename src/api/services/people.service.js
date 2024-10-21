@@ -22,3 +22,10 @@ export async function insertBooks(book) {
     console.error(error.message);
   }
 }
+export async function getBooksFromPeople(id) {
+  try {
+    return await People.find({ _id: id });
+  } catch (error) {
+    console.error(error.message);
+  }
+}

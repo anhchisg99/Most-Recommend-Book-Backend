@@ -1,4 +1,8 @@
-import { createPeople, insertBooks } from "../services/people.service.js";
+import {
+  createPeople,
+  insertBooks,
+  getBooksFromPeople,
+} from "../services/people.service.js";
 
 export async function createPeopleController(req, res) {
   try {
@@ -23,6 +27,18 @@ export async function insertBooksController(req, res) {
     const book = await insertBooks({ name, sub, source, id });
 
     res.status(200).json(book);
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+}
+export async function getBooksFromPeopleController(req, res) {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(401).json({ error: "not found id" });
+    }
+    const books = await getBooksFromPeople(id);
+    res.status(200).json(books);
   } catch (error) {
     res.status(400).json({ error });
   }
