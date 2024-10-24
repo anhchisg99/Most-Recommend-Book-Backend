@@ -6,12 +6,14 @@ import {
 
 export async function createPeopleController(req, res) {
   try {
+    let image = req.file.path;
+
     const { name, introduction } = req.body;
 
-    if (!name || !introduction) {
+    if (!name || !introduction || !image) {
       return res.stutus(401).json({ error: "not found" });
     }
-    const people = await createPeople({ name, introduction });
+    const people = await createPeople({ name, introduction, image });
     res.status(200).json(people);
   } catch (error) {
     res.status(400).json({ error });

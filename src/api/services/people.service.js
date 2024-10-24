@@ -2,8 +2,8 @@ import People from "../models/people.model.js";
 
 export async function createPeople(people) {
   try {
-    const { name, introduction } = people;
-    return await People.create({ name, introduction });
+    const { name, introduction, image } = people;
+    return await People.create({ name, introduction, img: image });
   } catch (error) {
     console.error(error.message);
   }
