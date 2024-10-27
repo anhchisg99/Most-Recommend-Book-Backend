@@ -8,9 +8,29 @@ export async function createCategories(name) {
   }
 }
 
+export async function getSpecificCategory(slug) {
+  try {
+    return await Categories.findOne({ slug: slug })
+      .lean()
+      .populate("peoples", "name img -_id");
+  } catch (error) {
+    console.error(erorr.message);
+  }
+}
 export async function getCategories() {
   try {
-    return await Categories.find({}).select("name -_id");
+    return await Categories.find({});
+  } catch (error) {
+    console.error(erorr.message);
+  }
+}
+
+export async function insertPeople(_peopleId, _categoriesId) {
+  try {
+    const match = { _id: _categoriesId };
+    return await Categories.findOneAndUpdate(match, {
+      $push: { peoples: _peopleId },
+    });
   } catch (error) {
     console.error(error.message);
   }

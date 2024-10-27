@@ -8,10 +8,12 @@ const PORT = 3000;
 
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
+import cors from "cors";
+// router
 import categoriesRoute from "./src/api/routes/categories.route.js";
 import peopleRoute from "./src/api/routes/people.route.js";
 
-// multer
+app.use(cors());
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json

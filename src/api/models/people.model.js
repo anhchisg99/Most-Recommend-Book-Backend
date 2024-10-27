@@ -1,11 +1,26 @@
 import mongoose from "mongoose";
+
 const { Schema } = mongoose;
 
-const peopleSchema = Schema({
-  name: String,
-  introduction: String,
-  books: Array,
-  img: String,
+const opts = { toJSON: { virtuals: true } };
+const peopleSchema = Schema(
+  {
+    name: String,
+    introduction: String,
+    books: Array,
+    img: String,
+    slug: { type: String, slug: "name" },
+  },
+  opts
+);
+
+peopleSchema.pre("save", function (next) {
+  this.slug = this.name.split(" ").join("-");
+  next();
+});
+peopleSchema.virtual("totalBooks").get(function () {
+  return this.books.length;
+  // return sum;
 });
 const People = mongoose.model("People", peopleSchema);
 export default People;
