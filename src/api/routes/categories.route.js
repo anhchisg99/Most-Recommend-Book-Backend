@@ -9,7 +9,7 @@ import {
 
 categoriesRoute.get("/", getCategoriesController);
 categoriesRoute.post("/create", createCategoriesController);
-categoriesRoute.get("/:slug", getSpecificCategoryController);
+categoriesRoute.get("/search/:slug", getSpecificCategoryController);
 categoriesRoute.put("/:categoriesId", insertPeopleController);
 
 export default categoriesRoute;

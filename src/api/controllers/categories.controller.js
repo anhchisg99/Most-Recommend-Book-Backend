@@ -4,6 +4,7 @@ import {
   getSpecificCategory,
   insertPeople,
 } from "../services/categories.service.js";
+import { getPeoplesList } from "../services/people.service.js";
 
 export async function createCategoriesController(req, res) {
   try {
@@ -22,9 +23,15 @@ export async function createCategoriesController(req, res) {
 export async function getSpecificCategoryController(req, res) {
   try {
     let { slug } = req.params;
+    console.log(slug);
 
-    const categories = await getSpecificCategory(slug);
-    res.status(200).json(categories);
+    if (slug == ":slug" || slug == "all") {
+      const peopleLists = await getPeoplesList();
+      res.status(200).json({ peoples: peopleLists });
+    } else {
+      const categories = await getSpecificCategory(slug);
+      res.status(200).json(categories);
+    }
   } catch (error) {
     res.status(400).json({ err: "not found category" });
   }

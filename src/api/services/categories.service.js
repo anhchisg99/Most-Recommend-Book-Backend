@@ -12,7 +12,7 @@ export async function getSpecificCategory(slug) {
   try {
     return await Categories.findOne({ slug: slug })
       .lean()
-      .populate("peoples", "name img -_id");
+      .populate("peoples", "name img slug -_id");
   } catch (error) {
     console.error(erorr.message);
   }
