@@ -3,6 +3,7 @@ import {
   getCategories,
   getSpecificCategory,
   insertPeople,
+  insertBulkCategories,
 } from "../services/categories.service.js";
 import { getPeoplesList } from "../services/people.service.js";
 
@@ -23,7 +24,7 @@ export async function createCategoriesController(req, res) {
 export async function getSpecificCategoryController(req, res) {
   try {
     let { slug } = req.params;
-    console.log(slug);
+    // console.log(slug);
 
     if (slug == ":slug" || slug == "all") {
       const peopleLists = await getPeoplesList();
@@ -49,6 +50,15 @@ export async function insertPeopleController(req, res) {
     const { categoriesId } = req.params;
     const { peopleId } = req.body;
     const categories = await insertPeople(peopleId, categoriesId);
+    res.status(200).json(categories);
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+}
+export async function insertBulkCategoriesController(req, res) {
+  try {
+    const { categoryList } = req.body;
+    const categories = await insertBulkCategories(categoryList);
     res.status(200).json(categories);
   } catch (error) {
     res.status(400).json({ error });

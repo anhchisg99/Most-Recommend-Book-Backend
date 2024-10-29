@@ -35,3 +35,11 @@ export async function insertPeople(_peopleId, _categoriesId) {
     console.error(error.message);
   }
 }
+
+export async function insertBulkCategories(categoryList) {
+  try {
+    return await Categories.insertMany(categoryList);
+  } catch (error) {
+    console.error(error.message);
+  }
+}

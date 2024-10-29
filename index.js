@@ -9,6 +9,7 @@ const PORT = 3000;
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cors from "cors";
+// import _ from "lodash";
 // router
 import categoriesRoute from "./src/api/routes/categories.route.js";
 import peopleRoute from "./src/api/routes/people.route.js";
