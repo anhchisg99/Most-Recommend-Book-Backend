@@ -6,6 +6,8 @@ import {
   getPeopleSlug,
   getPeoplesList,
   searchByPeople,
+  insertBulkPeople,
+  insertBulkBooks,
   // getBooks,
 } from "../services/people.service.js";
 
@@ -100,6 +102,26 @@ export async function searchByPeopleController(req, res) {
     const { q } = req.query;
     const people = await searchByPeople(q);
     res.status(200).json({ people });
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+}
+
+export async function insertBulkPeopleController(req, res) {
+  try {
+    const { peopleList } = req.body;
+
+    const peoples = await insertBulkPeople(peopleList);
+    res.status(200).json({ status: "success" });
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+}
+export async function insertBulkBooksController(req, res) {
+  try {
+    const { id, books } = req.body;
+    await insertBulkBooks(id, books);
+    res.status(200).json({ status: "success" });
   } catch (error) {
     res.status(400).json({ error });
   }

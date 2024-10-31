@@ -17,7 +17,9 @@ export async function getPeoples() {
 }
 export async function getPeoplesList() {
   try {
-    return await People.find({}).lean().select("name img -_id slug");
+    return await People.find({})
+      .lean()
+      .select("name img num_of_books -_id slug");
   } catch (error) {
     console.error(error.message);
   }
@@ -65,6 +67,23 @@ export async function searchByPeople(keyword) {
     // const regex = new RegExp(keyword,'i')
 
     return await People.find({ name: { $regex: keyword, $options: "i" } });
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+export async function insertBulkPeople(peopleList) {
+  try {
+    return await People.insertMany(peopleList);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+export async function insertBulkBooks(id, books) {
+  try {
+    const filter = { _id: id };
+    const update = { books };
+    return await People.findOneAndUpdate(filter, update);
   } catch (error) {
     console.error(error.message);
   }

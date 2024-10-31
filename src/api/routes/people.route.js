@@ -5,15 +5,19 @@ import uploadImg from "../utils/uploadImg.js";
 import {
   createPeopleController,
   insertBooksController,
-  getBooksFromPeopleController,
+  // getBooksFromPeopleController,
   getPeoplesController,
   getPeopleSlugController,
   getPeoplesListController,
   searchByPeopleController,
+  insertBulkPeopleController,
+  insertBulkBooksController,
 } from "../controllers/people.controller.js";
 
 peopleRoute.get("/", getPeoplesController);
 peopleRoute.get("/search", searchByPeopleController);
+peopleRoute.post("/insert-bulk", insertBulkPeopleController);
+peopleRoute.post("/insert-books", insertBulkBooksController);
 peopleRoute.get("/lists", getPeoplesListController);
 peopleRoute.post("/", uploadImg.single("image"), createPeopleController);
 peopleRoute.put(
