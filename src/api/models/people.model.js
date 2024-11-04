@@ -8,6 +8,7 @@ const peopleSchema = Schema(
     name: String,
     introduction: String,
     books: Array,
+    writers: Array,
     img: String,
     slug: { type: String, slug: "name" },
     num_of_books: Number,

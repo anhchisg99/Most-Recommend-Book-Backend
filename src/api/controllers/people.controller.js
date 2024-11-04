@@ -111,7 +111,7 @@ export async function insertBulkPeopleController(req, res) {
   try {
     const { peopleList } = req.body;
 
-    const peoples = await insertBulkPeople(peopleList);
+    await insertBulkPeople(peopleList);
     res.status(200).json({ status: "success" });
   } catch (error) {
     res.status(400).json({ error });
